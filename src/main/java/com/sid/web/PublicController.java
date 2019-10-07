@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sid.dao.ProductRepository;
+import com.sid.dao.UserRepository;
 import com.sid.entities.Product;
+import com.sid.entities.User;
 
 @RestController
 @RequestMapping("/api")
@@ -17,6 +19,8 @@ public class PublicController {
 	
 	@Autowired
 	private ProductRepository productRepository;
+	@Autowired
+	private UserRepository userRepository;
 	
 	@GetMapping("/products")
 	public List<Product> listProducts() {
@@ -24,12 +28,8 @@ public class PublicController {
 	}
 	
 	@GetMapping("/users")
-	public List<String> listUsers() {
-		List<String> users =new ArrayList<String>();
-		users.add("Taoufiq");
-		users.add("Mohammed");
-		users.add("Othmane");
-		return users;
+	public List<User> listUsers() {
+		return userRepository.findAll();
 	}
 
 }
